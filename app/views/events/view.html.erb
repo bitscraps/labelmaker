@@ -1,0 +1,81 @@
+<h1 style="font-family:'Comfortaa', cursive;"><%= @event.event_name %></h1>
+<h3 style="font-family:'Comfortaa', cursive;"><%= @event.event_date.strftime "%d %B %Y" %></h4>
+
+
+
+<div style="clear:both;width:100%;padding-top:30px;">
+	<div style="float:left;">
+		<h2 style="font-family:'Comfortaa', cursive;">Templates</h2>
+
+	</div>
+	<div style="float:right">
+		<% unless @templates.size == 0 %>
+			<%= link_to 'Add New Template', {:controller => 'templates', :action => 'create', :id => params[:id]}, :class => "btn btn-primary" %>
+		<% end %>
+	</div>
+</div>
+
+<div style="clear:both;padding-bottom:20px;"></div>
+
+<% if @templates.size == 0 %>
+	<p class="font-shadow" style="font-size:22px;text-align:center; width:100%;">No templates have been added for this event.  <br>Add a template individually or in bulk with a csv.<br><br>
+	<%= link_to 'Add New Template', {:controller => 'templates', :action => 'create', :id => params[:id]}, :class => "btn btn-primary" %></p>
+<% end %>
+
+<div style="clear:both;width:100%;padding-top:30px;">
+	<div style="float:left;">
+		<h2 style="font-family:'Comfortaa', cursive;">Attendees</h2>
+
+	</div>
+	<div style="float:right">
+		<% unless @attendees.size == 0 %>
+			<%= link_to 'Upload Attendee CSV', {:controller => 'attendees', :action => 'upload', :id => params[:id]}, :class => "btn" %>
+			<%= link_to 'Add New Attendee', {:controller => 'attendees', :action => 'create', :id => params[:id]}, :class => "btn btn-primary" %>
+		<% end %>
+	</div>
+</div>
+<div style="clear:both;padding-bottom:20px;"></div>
+
+<% if @attendees.size == 0 %>
+	<p class="font-shadow" style="font-size:22px;text-align:center; width:100%;">No one is attending this event.  <br>Add delegates individually or in bulk with a csv.<br><br>
+	<%= link_to 'Upload Attendee CSV', {:controller => 'attendees', :action => 'upload', :id => params[:id]}, :class => "btn" %>
+		<%= link_to 'Add New Attendee', {:controller => 'attendees', :action => 'create', :id => params[:id]}, :class => "btn btn-primary" %></p>
+<% else %>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>
+					Last Name
+				</th>
+				<th>
+					First Name
+				</th>
+				<th>
+					Added
+				</th>
+				<th>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @attendees.each do |attendee| %>
+				<tr>
+					<td style="width:15%;">
+						<%= attendee.lname %>
+					</td>
+					<td style="width:45%;">
+						<%= attendee.fname %>
+					</td>
+					
+					<td>
+						<%= attendee.created_at.strftime "%d %B %Y %H:%M" %>
+					</td>
+					<td style="text-align:right;">
+						<%= link_to '<i class="icon-pencil"></i> Edit', :controller => 'attendees', :action => 'edit', :id => attendee.id %>&nbsp;
+						<%= link_to '<i class="icon-trash"></i> Delete', :controller => 'attendees', :action => 'destroy', :id => attendee.id %>
+					</td>
+			<% end %>
+		</tbody>
+	</table>	
+<% end %>
+

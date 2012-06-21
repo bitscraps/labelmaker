@@ -1,0 +1,9 @@
+form {
+  width: auto; }
+
+.center-form form {
+  margin: auto; }
+  .center-form form input[type=submit] {
+    display: block;
+    clear: left;
+    margin: auto; }

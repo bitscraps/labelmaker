@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Label Maker</title>
+		<%= stylesheet_link_tag 'bootstrap.min' %>
+		<%= stylesheet_link_tag 'fonts' %>
+		<%= stylesheet_link_tag 'layout' %>
+		<%= javascript_include_tag 'bootstrap.min' %>
+		<link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light|Comfortaa:400,700' rel='stylesheet' type='text/css'>
+	</head>
+
+	<body>
+		<div class="navbar navbar-fixed-top" style="width:100%;">
+		  <div class="navbar-inner">
+		    <div class="container" style="width:100%;margin-left:10px;">
+		      <ul class="nav">
+		      	  <a class="brand font-comfortaa" href="/">
+ 					Label Maker
+				  </a>
+				  <li <% if params[:controller] == 'events' %> class="active"<% end %>>
+				    <%= link_to 'Events', :controller => '/events', :action => 'index' %>
+				  </li>
+				</ul>
+		    </div>
+		  </div>
+		</div>
+		<div class="container-fluid" style="margin-top:50px;">
+		  	<% if flash[:notice] %>
+		  		<div class="alert alert-success" style="margin-left:10px;margin-top:10px;">
+			  		<%= flash[:notice] %>
+				</div>
+		  	<% end %>
+		  	<% if flash[:warning] %>
+		  		<div class="alert alert-error" style="margin-left:10px;margin-top:10px;">
+			  		<%= flash[:warning] %>
+				</div>
+		  	<% end %>
+			<%= yield %>
+		</div>
+	</body>
+</html>

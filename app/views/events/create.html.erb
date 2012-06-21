@@ -1,0 +1,11 @@
+<div style="margin-left:20px;margin-top:20px;">
+<% form_for :event do |form| %>
+	<%= form.label :event_name %>
+	<%= form.text_field :event_name %>
+
+	<%= form.label :event_date %>
+	<%= form.date_select :event_date, {:order => [:day, :month, :year]}, {:class => 'span1', :style=> "float:left;margin-right:10px;"} %>
+
+	<%= form.submit 'Create Event', :class => "btn btn-primary btn-large", :style=> "clear:left;display:block;margin-top:70px;" %>
+<% end %>
+</div>

@@ -1,0 +1,14 @@
+.font-shadow {
+  font-family: 'Shadows Into Light', cursive; 
+}
+
+.font-comfortaa {
+  font-family: 'Comfortaa', cursive; 
+}
+
+ label {
+ 	font-family: 'Shadows Into Light', cursive;
+ 	font-size:22px;
+ 	margin-bottom:10px;
+ 	margin-top: 20px;
+ }
