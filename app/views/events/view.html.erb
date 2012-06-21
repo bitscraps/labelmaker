@@ -9,17 +9,32 @@
 
 	</div>
 	<div style="float:right">
-		<% unless @templates.size == 0 %>
-			<%= link_to 'Add New Template', {:controller => 'templates', :action => 'create', :id => params[:id]}, :class => "btn btn-primary" %>
+		<% unless @pdf_templates.size == 0 %>
+			<%= link_to 'Add New Template', {:controller => 'pdf_templates', :action => 'create', :id => params[:id]}, :class => "btn btn-primary" %>
 		<% end %>
 	</div>
 </div>
 
 <div style="clear:both;padding-bottom:20px;"></div>
 
-<% if @templates.size == 0 %>
+<% if @pdf_templates.size == 0 %>
 	<p class="font-shadow" style="font-size:22px;text-align:center; width:100%;">No templates have been added for this event.  <br>Add a template individually or in bulk with a csv.<br><br>
-	<%= link_to 'Add New Template', {:controller => 'templates', :action => 'create', :id => params[:id]}, :class => "btn btn-primary" %></p>
+	<%= link_to 'Add New Template', {:controller => 'pdf_templates', :action => 'create', :id => params[:id]}, :class => "btn btn-primary" %></p>
+<% else %>
+	<% @pdf_templates.each do |pdf| %>
+		<ul class="thumbnails" style="float:left; margin-right:20px;">
+	  		<li class="span3">
+	    		<div class="thumbnail">
+	    		  <h2  class="font-shadow" style="margin-bottom:6px;"><%= pdf.template_name %></h2>
+	    		  
+	    		  <img src="http://placehold.it/260x180" alt="" style="margin-bottom:5px;">
+	    		  <%= link_to '<i class="icon-pencil icon-white"></i> &nbsp;Edit', {:controller => 'pdf_templates', :action => 'edit', :id => pdf.id}, :class => "btn btn-primary", :style => "padding-left:17px;padding-right:17px;" %>
+	    		  <%= link_to '<i class="icon-print icon-white"></i> &nbsp;Print', {:controller => 'pdf_templates', :action => 'merge', :id => pdf.id}, :class => "btn btn-primary", :style => "padding-left:17px;padding-right:17px;" %>
+	    		  <%= link_to '<i class="icon-trash icon-white"></i>', {:controller => 'pdf_templates', :action => 'destroy', :id => pdf.id}, :class => "btn btn-danger" %>
+	    		</div>
+	  		</li>
+	 	</ul>
+	 <% end %>
 <% end %>
 
 <div style="clear:both;width:100%;padding-top:30px;">

@@ -24,6 +24,7 @@
 				</th>
 				<th>
 				</th>
+				<th></th>
 				<td>
 				</td>
 			</tr>
@@ -40,8 +41,11 @@
 					<td  style="width:20%;">
 						<%= event.created_at.strftime "%d %B %Y %H:%M" %>
 					</td>
-					<td style="width:10%;">
+					<td style="width:5%;">
 						<i class="icon-user"></i> <%= event.attendees.size %>
+					</td> 
+					<td style="width:5%;">
+						<i class="icon-file"></i> <%= event.pdf_templates.size %>
 					</td>
 					<td style="text-align:right; width:20%">
 						<%= link_to '<i class="icon-eye-open"></i> View', :action => 'view', :id => event.id %>

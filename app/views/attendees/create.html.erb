@@ -1,2 +1,11 @@
-<h1>Attendees#create</h1>
-<p>Find me in app/views/attendees/create.html.erb</p>
+<% form_for :attendee do |form| %>
+	<%= form.label :fname, 'First Name' %>
+	<%= form.text_field :fname %>
+
+	<%= form.label :lname, 'Last Name' %>
+	<%= form.text_field :lname %>
+	
+	<br><br>
+	
+	<%= form.submit 'Add Attendee', :class => "btn btn-primary btn-large"%>
+<% end %>

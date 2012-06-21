@@ -1,0 +1,8 @@
+<% form_for :pdf_template do |form| %>
+	<%= form.label :template_name %>
+	<%= form.text_field :template_name %>
+
+	<br><br>
+	
+	<%= form.submit 'Create Template', :class => "btn btn-primary btn-large"%>
+<% end %>

@@ -3,12 +3,21 @@ class AttendeesController < ApplicationController
   require 'fastercsv'
   
   def create
+    if request.post?
+      @attendee = Attendee.create(params[:attendee])
+      @attendee.event_id = params[:id]
+      @attendee.save
+      flash[:notice] = 'Succesfully added new attendee'
+      redirect_to :controller => 'events', :action => 'view', :id => params[:id]
+    end
   end
 
   def edit
   end
 
   def destroy
+    Attendee.destroy(params[:id])
+    redirect_to :back
   end
 
   def upload
