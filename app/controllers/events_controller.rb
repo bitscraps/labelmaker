@@ -25,7 +25,7 @@ class EventsController < ApplicationController
 
   def view
     @event = Event.find_by_id(params[:id])
-    @attendees = Attendee.find_all_by_event_id(params[:id], :order => "lname,fname")
+    @attendees = Attendee.find_all_by_event_id(params[:id])
     @pdf_templates = PdfTemplate.find_all_by_event_id(params[:id])
   end
 

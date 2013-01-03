@@ -4,4 +4,8 @@
 # Mime::Type.register "text/richtext", :rtf
 # Mime::Type.register_alias "text/html", :iphone
 
-  Mime::Type.register "application/pdf", :pdf
+require 'princely/pdf_helper'
+
+Mime::Type.register 'application/pdf', :pdf
+
+ActionController::Base.send(:include, PdfHelper)

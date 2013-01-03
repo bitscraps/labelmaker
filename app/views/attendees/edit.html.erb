@@ -1,2 +1,14 @@
-<h1>Attendees#edit</h1>
-<p>Find me in app/views/attendees/edit.html.erb</p>
+<% form_for :attendee do |form| %>
+	<%= form.label :fname, 'First Name' %>
+	<%= form.text_field :fname %>
+
+	<%= form.label :lname, 'Last Name' %>
+	<%= form.text_field :lname %>
+
+	<%= form.label :options, 'Options' %>
+	<%= form.text_area :options %>
+	
+	<br><br>
+	
+	<%= form.submit 'Add Attendee', :class => "btn btn-primary btn-large"%>
+<% end %>

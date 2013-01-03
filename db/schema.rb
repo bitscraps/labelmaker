@@ -9,13 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120621104410) do
+ActiveRecord::Schema.define(:version => 20120626084512) do
 
   create_table "attendees", :force => true do |t|
     t.string   "fname"
     t.string   "lname"
     t.text     "options"
     t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "date_files", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20120621104410) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "event_id"
+    t.text     "template_options"
   end
 
 end

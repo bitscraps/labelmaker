@@ -1,0 +1,81 @@
+<html style="margin:0px;padding:0px;">
+<style="text/css">
+	@page { 
+		margin: 0px 0px 0px 0px; 
+		padding: 0px 0px 0px 0px
+	 }
+	 .new_page { page-break-before: always }
+</style>
+<body style="margin:0px;padding:0px;margin-left:76px;margin-top:16px;">
+	<% @attendees.each do |att| %>
+		<div style="width:317px;height:168px;margin-right:28px;margin-top:171px;float:left;background-image:url(http://labelmaker/data/background-pc.png);border-bottom:1px SOLID #CCCCCC;">
+			<div style="float:left;margin-top:16px;margin-left:15px;width:100px;">
+				<img src="http://labelmaker/data/ActionCOACH.png" style="width:130px;;height:auto;">
+			</div>
+			
+
+			<div style="width:315px;height:24px; font-size:24px; font-family:Arial; text-align:center; margin-top:65px;margin-bottom:20px;color:#064A77;<% if (att.fname.size+att.lname.size) >= 24 %>font-size:18px;margin-top:70px;margin-bottom:15px;<% end %> "><%= att.fname %> <%= att.lname %></div>
+			<div style="border-top:2px SOLID #A6483F;width:100%;height:2px;"></div>
+			<div style="width:315px;bottom:0px;height:24px;margin-bottom:5px;">
+				
+				
+				<% if att.options =~ /Cheesecake: "1"/ %>
+					<div style="float:right"><img src="http://labelmaker/data/cheesecake.png" style="height:24px;width:auto;margin-top:13px;margin-right:15px;"></div>
+				<% end %>
+				<% if att.options =~ /Chocolate: "1"/ %>
+					<div style="float:right"><img src="http://labelmaker/data/chocolate.png" style="height:24px;width:auto;margin-top:13px;margin-right:15px;"></div>
+				<% end %>
+				<% if att.options =~ /Fruit: "1"/ %>
+					<div style="float:right;font-size:24px;margin-left:5px;margin-right:5px;margin-top:13px;font-family:Arial;color:#616161">F</div>
+				<% end %>
+				<% if att.options =~ /Ravioli: "1"/ %>
+					<div style="float:right"><img src="http://labelmaker/data/ravioli.png" style="height:24px;width:auto;margin-top:13px;margin-right:5px;"></div>
+				<% end %>
+				<% if att.options =~ /Sirloin: "1"/ %>
+					<div style="float:right"><img src="http://labelmaker/data/sirloin.png" style="height:24px;width:auto;margin-top:13px;margin-right:5px;"></div>
+				<% end %>
+				<% if att.options =~ /Chicken: "1"/ %>
+					<div style="float:right;font-size:24px;margin-left:5px;margin-right:5px;margin-top:13px;font-family:Arial;color:#616161">C</div>
+				<% end %>
+				<% if att.options =~ /Salmon: "1"/ %>
+					<div style="float:right"><img src="http://labelmaker/data/salmon.png" style="height:24px;width:auto;margin-top:13px;margin-right:5px;"></div>
+				<% end %>
+				<% if att.options =~ /Tart: "1"/ %>
+					<div style="float:right"><img src="http://labelmaker/data/tart.png" style="height:24px;width:auto;margin-top:13px;margin-right:5px;"></div>
+				<% end %>
+				<% if att.options =~ /Asparagus: "1"/ %>
+					<div style="float:right;font-size:24px;margin-left:5px;margin-right:5px;margin-top:13px;font-family:Arial;color:#616161">A</div>
+				<% end %>
+			</div>
+		</div>
+		<% if @count == 6 %>
+			<div class='new_page'></div>
+			<% @count = 0 %>
+		<% end %>
+		<% @count += 1 %>
+
+	<% end %>
+	<% 12.times do %>
+		<div style="width:317px;height:168px;margin-right:28px;margin-top:171px;float:left;background-image:url(http://labelmaker/data/background-pc.png);border-bottom:1px SOLID #CCCCCC;">
+			<div style="float:left;margin-top:16px;margin-left:15px;width:100px;">
+				<img src="http://labelmaker/data/ActionCOACH.png" style="width:130px;;height:auto;">
+			</div>
+			
+
+			<div style="width:315px;height:24px; font-size:24px; font-family:Arial; text-align:center; margin-top:65px;margin-bottom:20px;color:#064A77; "></div>
+			<div style="border-top:2px SOLID #A6483F;width:100%;height:2px;"></div>
+			<div style="width:315px;bottom:0px;height:24px;margin-bottom:5px;">
+				
+				
+				
+			</div>
+		</div>
+		<% if @count == 6 %>
+			<div class='new_page'></div>
+			<% @count = 0 %>
+		<% end %>
+		<% @count += 1 %>
+
+	<% end %>
+</body>
+</html>

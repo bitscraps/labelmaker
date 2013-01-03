@@ -13,6 +13,13 @@ class AttendeesController < ApplicationController
   end
 
   def edit
+    @attendee = Attendee.find_by_id(params[:id])
+
+    if request.post?
+      @attendee.update_attributes(params[:attendee])
+      redirect_to :controller => 'events', :action => 'view', :id => @attendee.event_id
+    end
+
   end
 
   def destroy

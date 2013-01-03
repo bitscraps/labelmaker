@@ -1,0 +1,41 @@
+<html style="margin:0px;padding:0px;">
+<style="text/css">
+	@page { 
+		margin: 0px 0px 0px 0px; 
+		padding: 0px 0px 0px 0px
+	 }
+	 .new_page { page-break-before: always }
+</style>
+<body style="margin:0px;padding:0px;margin-left:44px;margin-top:48px;">
+	<% @attendees.each do |att| %>
+		<div style="width:356px;height:225px;margin-right:20px;margin-bottom:18px;float:left;background-image:url(http://labelmaker/data/background.png);">
+			<div style="width:356px; height:48px; font-size:32px; font-family:Arial; text-align:center; margin-top:85px;color:#064A77">
+				<%= att.fname %> <%= att.lname %>
+			</div>
+			<div style="width:296px;margin-left:25px;margin-right:25px;text-align:right;font-size:20px; font-family:Arial;margin-top:8px;color:#616161;font-weight:bold;">
+				<% @options = YAML.parse att.options %>
+				<% if @options['Company '].value.size >= 32 %>
+					<span style="font-size:16px;">
+						<%= @options['Company '].value %>
+					</span>
+				<% elsif @options['Company '].value.size >= 24 %>
+					<span style="font-size:18px;">
+						<%= @options['Company '].value %>
+					</span>
+				<% else %>
+					<%= @options['Company '].value %>
+				<% end %>
+			</div>
+		</div>
+		<% if @count == 8 %>
+			<div class='new_page'></div>
+			<% @count = 0 %>
+		<% end %>
+		<% @count += 1 %>
+
+	<% end %>
+
+	
+
+</body>
+</html>

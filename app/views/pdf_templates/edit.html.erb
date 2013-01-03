@@ -1,2 +1,104 @@
-<h1>Templates#edit</h1>
-<p>Find me in app/views/templates/edit.html.erb</p>
+	<% form_for :template_options, :html => {:id => 'template_options',:multipart => true} do |form| %>
+	
+<h1 style="float:left"><%= @pdf_template.template_name %></h1>
+<input type=submit class="btn btn-large btn-primary" Value="Save Template" style="float:right;" >
+<br style="clear:both;">
+<br>
+<div style="width:69%;float:left;margin-right:1%;">
+	<h3 style="width:100%;border-bottom:1px SOLID #CCCCCC;">Preview</h3>
+	<div style="width:100%;height:100%;overflow:scroll" id='preview-pane'>
+	</div>	
+</div>
+<div style="width:30%;float:left;">
+	<h3 style="width:100%;border-bottom:1px SOLID #CCCCCC;">Options</h3>
+
+	<label>Page Size (mm)</label>
+		<input type="text" name="options[page_height]" id="page_height" placeholder="H" class="span1" onchange="redraw()" value="<%= @pdf_template.template_options[:page_height] %>">&nbsp; x &nbsp;
+		<input type="text" name="options[page_width]" id="page_width" placeholder="W" class="span1" onchange="redraw()" value="<%= @pdf_template.template_options[:page_width] %>">
+
+		<label>Page Margins</label>
+		T: <input type="text" name="options[margin_top]" id="margin_top" placeholder="in mm" class="span1" onchange="redraw()" value="<%= @pdf_template.template_options[:margin_top] %>">
+		R: <input type="text" name="options[margin_right]" id="margin_right" placeholder="in mm" class="span1" onchange="redraw()" value="<%= @pdf_template.template_options[:margin_right] %>">
+		B: <input type="text" name="options[margin_bottom]" id="margin_bottom" placeholder="in mm" class="span1" onchange="redraw()" value="<%= @pdf_template.template_options[:margin_bottom] %>">
+		L: <input type="text" name="options[margin_left]" id="margin_left" placeholder="in mm" class="span1" onchange="redraw()" value="<%= @pdf_template.template_options[:margin_left] %>">
+
+		<label>Gutters</label>
+		H: <input type="text" name="options[gutter_horizontal]" id="gutter_horizontal" placeholder="in mm" class="span1" onchange="redraw()" value="<%= @pdf_template.template_options[:gutter_horizontal] %>">
+		V: <input type="text" name="options[gutter_vertical]" id="gutter_vertical" placeholder="in mm" class="span1" onchange="redraw()" value="<%= @pdf_template.template_options[:gutter_vertical] %>">
+
+		<label>Labels Per Page</label>
+		<input type="text" name="options[labels_pp]" id="labels_pp" placeholder="" class="span1" onchange="redraw()" value="<%= @pdf_template.template_options[:labels_pp] %>">
+		
+
+		<label>Labels Dimensions</label>
+		H: <input type="text" name="options[label_width]" id="label_width" placeholder="in mm" class="span1" onchange="redraw()" value="<%= @pdf_template.template_options[:label_width] %>">
+		V: <input type="text" name="options[label_height]" id="label_height" placeholder="in mm" class="span1" onchange="redraw()" value="<%= @pdf_template.template_options[:label_height] %>">
+
+		
+		<label>Background Image</label>
+		<div class="well">
+			<input type="file" name="datafile" id="file" placeholder="in mm" class="span3" onchange="redraw()">
+			<input type="submit" value="Upload" class="btn btn-primary btn-large" style="float:right;">
+		</div>
+		<input type="hidden" name="options[background]" id="background" placeholder="in mm" class="span3" onchange="redraw()" value="<%= @pdf_template.template_options[:background] %>">
+	<% end %>
+</div>
+
+
+<script type="text/javascript">
+	function redraw() {
+		width = document.getElementById('page_width').value;
+		height = document.getElementById('page_height').value;
+
+		margin_left = document.getElementById('margin_left').value;
+		margin_top = document.getElementById('margin_top').value;
+		margin_right = document.getElementById('margin_right').value;
+		margin_bottom = document.getElementById('margin_bottom').value;
+
+		width = width - margin_left - margin_right;
+		height = height - margin_top - margin_bottom;
+
+		labels_pp = document.getElementById('labels_pp').value;
+
+		label_width = document.getElementById('label_width').value;
+		label_height = document.getElementById('label_height').value;
+
+		gutter_horizontal = document.getElementById('gutter_horizontal').value;
+		gutter_vertical = document.getElementById('gutter_vertical').value;
+
+		pd = document.createElement('div');
+		pd.id = 'preview-add';
+		pd.style.margin = 'auto';
+		pd.style.marginTop = '20px';
+		pd.style.border = '1px SOLID #888';
+		pd.style.width = width+'px';
+		pd.style.height = height+'px';
+
+		pd.style.paddingTop = margin_top+'px';
+		pd.style.paddingRight = margin_right+'px';
+		pd.style.paddingBottom = margin_bottom+'px';
+		pd.style.paddingLeft = margin_left+'px';
+
+		console.log(labels_pp);
+		for (i=1; i<=labels_pp; i++) {
+			label = document.createElement('div');
+			label.style.backgroundColor = '#CCC';
+			label.style.float = 'left';
+			label.style.width = label_width+'px';
+			label.style.height = label_height+'px';
+			label.style.marginRight = gutter_horizontal+'px';
+			label.style.marginBottom = gutter_vertical+'px';
+
+			pd.appendChild(label);
+		}
+
+		
+
+		if (document.getElementById('preview-add')) {
+			document.getElementById('preview-pane').removeChild(document.getElementById('preview-add')) 
+		}
+		document.getElementById('preview-pane').appendChild(pd);
+	}
+
+	redraw();
+</script>
